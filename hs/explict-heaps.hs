@@ -70,39 +70,39 @@ unHeap (Node lhs x rhs) = x:unHeap' (lhs, rhs)
 
 
 test_unHeap :: Spec
-test_unHeap = describe "test unheap runs in bfs order" $ do
+test_unHeap = describe "test unHeap runs in bfs order" $ do
 
   let xs = Node (singletonHeap 1) 3 (singletonHeap 2) :: MaxHeap Int
   let xs' = [3, 1, 2]
-  it "shallow tree maxHeap" $ (unHeap xs) `shouldBe` xs'
+  it "shallow tree maxHeap" $ unHeap xs `shouldBe` xs'
 
   let ys = Node xs 10 xs :: MaxHeap Int
   let ys' = [10, 3, 3, 1, 2, 1, 2]
-  it "deeper balanced tree maxHeap" $ (unHeap ys) `shouldBe` ys'
+  it "deeper balanced tree maxHeap" $ unHeap ys `shouldBe` ys'
 
   let zs = Node xs 10 Empty :: MaxHeap Int
   let zs' = [10, 3, 1, 2]
-  it "unbalanced tree maxHeap - left biased" $ (unHeap zs) `shouldBe` zs'
+  it "unbalanced tree maxHeap - left biased" $ unHeap zs `shouldBe` zs'
 
   let zs = Node Empty 10 xs :: MaxHeap Int
   let zs' = [10, 3, 1, 2]
-  it "unbalanced tree maxHeap - right biased" $ (unHeap zs) `shouldBe` zs'
+  it "unbalanced tree maxHeap - right biased" $ unHeap zs `shouldBe` zs'
 
   let xs = Node (singletonHeap 1) 3 (singletonHeap 2) :: MinHeap Int
   let xs' = [3, 1, 2]
-  it "shallow tree minHeap" $ (unHeap xs) `shouldBe` xs'
+  it "shallow tree minHeap" $ unHeap xs `shouldBe` xs'
 
   let ys = Node xs 10 xs :: MinHeap Int
   let ys' = [10, 3, 3, 1, 2, 1, 2]
-  it "deeper balanced tree minHeap" $ (unHeap ys) `shouldBe` ys'
+  it "deeper balanced tree minHeap" $ unHeap ys `shouldBe` ys'
 
   let zs = Node xs 10 Empty :: MinHeap Int
   let zs' = [10, 3, 1, 2]
-  it "unbalanced tree minHeap - left biased"  $ (unHeap zs) `shouldBe` zs'
+  it "unbalanced tree minHeap - left biased"  $ unHeap zs `shouldBe` zs'
 
   let zs = Node Empty 10 xs :: MinHeap Int
   let zs' = [10, 3, 1, 2]
-  it "unbalanced tree minHeap - right biased"  $ (unHeap zs) `shouldBe` zs'
+  it "unbalanced tree minHeap - right biased"  $ unHeap zs `shouldBe` zs'
 
 
 
