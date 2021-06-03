@@ -15,13 +15,8 @@ let
 
 in pkgs.mkShell {
 
-
-  buildInputs = [
-    pkgs.nixfmt
-    pkgs.fd
-    pre-commit
-    (pkgs.ghc.withPackages haskellPackages)
-  ];
+  buildInputs =
+    [ pkgs.nixfmt pkgs.fd pre-commit (pkgs.ghc.withPackages haskellPackages) ];
 
   shellHook = ''
     ln -fs ${pre-commit}/bin/pre-commit ./.git/hooks/pre-commit
