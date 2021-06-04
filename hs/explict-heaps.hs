@@ -33,7 +33,8 @@ type MinHeap a = Heap MinHeapOrder a
 
 
 instance HeapOrder ord => Semigroup (Heap ord a) where
-  (<>) = undefined
+  Empty <> Empty = Empty
+  _ <> _ = undefined
 
 instance HeapOrder ord => Monoid (Heap ord a) where
   mempty = Empty
@@ -70,7 +71,7 @@ unHeap (Node lhs x rhs) = x:unHeap' (lhs, rhs)
 
 
 test_unHeap :: Spec
-test_unHeap = describe "test unHeap runs in bfs order" $ do
+test_unHeap = describe "unHeap runs in bfs order with a" $ do
 
   let xs = Node (singletonHeap 1) 3 (singletonHeap 2) :: MaxHeap Int
   let xs' = [3, 1, 2]
